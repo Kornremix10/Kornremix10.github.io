@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" contnt="width=device-width, initial-scale=1.0"/>
+        <title>Personal Website | Visualizations</title>
+        <link rel="stylesheet" href="style.css"/>
+        <script defer src="vis.js"></script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <header class="site-header">
+            <div class="container header-row">
+                <div>
+                    <p class="kicker">visualization Portfilio</p>
+                    <h1 class="title">SVG Work</h1>
+                    <p class="subtitle">All visuals below are generated with JavaScript + SVG.</p>
+                </div>
+
+                <nav class="nav">
+                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link active" href="visualizations.html">Visualizations</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main" class="container">
+            <!--Visualization 1: Data viz (SVG)-->
+            <section class="card">
+                <h2>Visualization 1 - "Weekly Time Spent by Category" (SVG Bar Chart)</h2>
+                <p class="muted">
+                    A simple SVG bar chart (axes, labels, tooltips) generated entirely in <code>vis.js</code>.
+                </p>
+                <div id="viz1" class="vis-wrap" aria-label="SVG bar chart container"></div>
+            </section>
+
+            <!--Visualization 2: Creative SVG art-->
+            <section class="card">
+                <h2>Visualization 2 - Creative SVG Art (Interactive "Constellation")</h2>
+                <p class="muted">
+                    Move your mouse over the canvas to "pull" points. Click to randomize.
+                </p>
+                <div class="rows">
+                    <button id="randomizeArt" class="btn btn-ghost" type="button">randomize</button>
+                    <span id="artHint" class="muted">Tip: try fast mouse movements.</span>
+                </div>
+                <div id="viz2" class="viz-wrap" aria-label="Creative SVG art container"></div>
+            </section>
+        </main>
+
+            <footer class="site-footer">
+                <div class="container footer-row">
+                    <p class="muted">Back to <a href="index.html">Home</a></p>
+                </div>
+            </footer>
+        </body>
+    </html>

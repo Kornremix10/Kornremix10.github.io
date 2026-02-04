@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Personal Website | Home</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script defer src="main.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="container header-row">
+            <div>
+                <p class="kicker">Personal Website</p>
+                <h1 class="title">Reme Mwase</h1>
+                <p class="subtitle">IAT 355</p>
+            </div>
+
+            <nav class="nav">
+                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="visualization.html">visualization</a>
+                <button id="themeBtn" class="btn btn-ghost" type="button" aria-pressed="false">
+                    Toggle theme
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+        <section class="card">
+            <h2>About</h2>
+            <p>
+                Hello! my name is <strong>Remekedzo Mwase</strong>. I'm studying <strong>SIAT</strong> and I'm intereseted in 
+                <strong>game design</strong>, <strong>animation</strong>, and <strong>Art</strong>.
+                I enjoy drawing and playing video games.
+            </p>
+
+            <div class="chips">
+                <span class="chips">Frontend</span>
+                <span class="chips">SVG</span>
+                <span class="chips">JavaScript</span>
+                <span class="chips">Design</span>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <section class="card">
+                <h2>Education</h2>
+                <ul class="list">
+                    <li>
+                        <strong>Simon Fraser University</strong> SIAT (2026)
+                        <div class="muted">Relevant courses: Game design, Data Viz, Web dev</div>
+                    </li>
+                    <li>
+                        <strong>Saint Johns College</strong> -IGCSE (2017)
+                        <div class="muted"> Vollyball award</div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Skills</h2>
+                <div class="skill-grid">
+                    <div class="skill">
+                        <div class="skill-top">
+                            <span>JavaScript</span><span class="muted">Intermediate</span>
+                        </div>
+                        <div class="bar"><div class="bar-filled" style="width: 70%"></div></div>
+                    </div>
+
+                    <div class="skill">
+                        <div class="skill-top">
+                            <span>HTML/CSS</span><span class="muted">Strong</span>
+                        </div>
+                        <div class="bar"><div class="bar-fill" style="width: 85%"></div></div>
+                    </div>
+
+                <div class="skill">
+                    <div class="skill-top">
+                        <span>Procreate</span><span class="muted">Intermediate</span>
+                    </div>
+                    <div class="bar"><div class="bar-fill" style="width: 65%"></div></div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-top">
+                        <span>Tools</span><span class="muted"></span>Procreate / sketch book</span>
+                    </div>
+                    <div class="bar"><div class="bar-fill" style="width: 75%"></div></div>
+                </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="card">
+            <h2>Experience & Projects</h2>
+            <div class="timeline">
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria-hidden="true"></div>
+                    <div>
+                        <h3>Project <span class="muted"> IAT 167</span></h3>
+                        <p class="muted"> October - 2025</p>
+                        <ul class="tight"> 
+                            <li>Built a video game platformer</li>
+                            <li>Used java on p5</li>
+                            <li>Learned how to put spirites in the game and make them animated</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-dot" aria aria-hidden="true"></div>
+                    <div>
+                        <h3>Another Experience <span class="muted"> Designer </span></h3>
+                        <p class="muted">January 2024</p>
+                        <ul class="list tight">
+                            <li> Contributed to designing a final animation for IAT 313</li>
+                            <li>Collaborated in adding sounds to the animation</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <section class="card">
+                <h2>Images</h2>
+                <p class="muted"></p>
+              <div class="image-grid">
+                <figure class="image-item">
+                     <img src="images/storyboard.png" alt="Storyboard sketches for film project">
+                        <figcaption class="muted">Storyboard sketches for visual storytelling</figcaption>
+                </figure>
+
+                <figure class="image-item">
+                    <img src="images/twinmotion.png" alt="Nighttime Twinmotion city render">
+                     <figcaption class="muted">Twinmotion environment render (lighting & mood)</figcaption>
+                </figure>
+
+                 <figure class="image-item">
+                    <img src="images/illaoi.jpg" alt="Stylized character illustration">
+                    <figcaption class="muted">Character design study (illustration)</figcaption>
+                </figure>
+            </div>
+            </section>
+
+            <section class="card">
+                <h2>Contact</h2>
+                <p class="muted"></p>
+
+                <form id="contactForm" class="form" novalidate>
+                    <label>
+                        name
+                        <input id="nameInput" name="name" type="text" placeholder="Your name" required />
+                     </label>
+
+                     <label>
+                        email
+                        <input id="emailInput" name="emailInput" type="email" placeholder="you@example.contactForm" required />
+                     </label>
+
+                     <label>
+                        Messsage
+                        <textarea id="msgInput" name="Messsage" rows="4" placeholder="write a short message..." required></textarea>
+                     </label>
+
+                     <button class="btn"    type="submit">send</button>
+                     <p id="formStatus" class="muted" role="status" aria-live="polite"></p>
+                 </form>    
+                
+                 <hr class="hr"/>
+
+                 <div class="links">
+                    <a class="link" href="visualization.html">View my visualization portfolio</a>
+                    <a class="link" href="#" target="_blank" rel="noreferrer">GitHub add link</a>
+                 </div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-row">
+            <p class="muted">© <span id="year"></span>Reme Mwase</p>
+            <a class="muted" href="visualizations.html">visualizations</a>
+        </div>
+    </footer>
+</body>
+</html>
