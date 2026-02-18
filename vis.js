@@ -1,6 +1,8 @@
 
 const DATA = "dataset/videogames_long.csv";
 
+
+
 // Visualization 1: Global Sales by Genre and Platform (Heatmap) 
 const vis1 = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
