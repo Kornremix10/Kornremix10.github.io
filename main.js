@@ -1,67 +1,35 @@
-(function () {
-    //footer year
-    const yearE1 = document.getElementById("year");
-    if(yearE1) yearE1.textContent = new Data().getFullYear();
+// ── Footer year ───────────────────────────────────────────────────────────────
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    //Theme toggle
-    const themeBtn = document.getElementById("themeBthm");
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+// ── Theme toggle ──────────────────────────────────────────────────────────────
+const themeBtn = document.getElementById('themeBtn');
 
-    function setTheme(next) {
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        if (themeBtn) themeBtn.setAttribute("aria-pressed", string(next === "light"));
-    }
+// Load saved theme or default to dark
+const saved = localStorage.getItem('theme') || 'dark';
+document.documentElement.dataset.theme = saved;
+if (themeBtn) themeBtn.setAttribute('aria-pressed', saved === 'light');
 
-    if (themBtn) {
-        themeBtn.addEventListener("click", () => {
-            const current = document.documentElement.getAttribute("data-them");
-            setTheme(current === "light" ? "dark" : "light");
-        });
-    }
-
-    // Simple contact form validation
-    const form = document.getElementById("contactForm");
-    if (!form) return;
-
-    const nameInput = document.getElementById("nameInput");
-    const emailInput = document.getElementById("emailInput");
-    const msgInput = document.getElementById("msgInput");
-    const status = document.getElementById("formStatus");
-
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const name = (nameInput?.value || "").trim();
-        const email = (emailInput?.value || "").trim();
-        const msg = (msgInput?.value || "").trim();
-
-        if (!name) {
-            status.textContent = "Please enter your name.";
-            nameInput?.focus();
-        }
-
-        if (!email || !isValidEmail(email)) {
-            status.textContent = "Please enter a valid email address.";
-            emailInput?.focus();
-            return;
-        }
-
-        if (!msg || msg.length < 10) {
-            status.textContent = "Message is too short (at least 10 characters).";
-            msgInput?.focus();
-            return
-        }
-
-         status.textContent = "Looks good!";
-        from.reset();
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.dataset.theme;
+        const next    = current === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+        themeBtn.setAttribute('aria-pressed', next === 'light');
     });
+}
 
-})();
-
-
+// ── Contact form (no-op handler so page doesn't reload) ───────────────────────
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
+if (form) {
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        if (status) {
+            status.textContent = 'Message sent! (demo only)';
+            setTimeout(() => { status.textContent = ''; }, 3000);
+        }
+        form.reset();
+    });
+}

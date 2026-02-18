@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Personal Website | Assignment 3</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script defer src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="container header-row">
+            <div>
+                <p class="kicker">Personal Website</p>
+                <h1 class="title">Reme Mwase</h1>
+                <p class="subtitle">IAT 355</p>
+            </div>
+            <nav class="nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="assignment3.html">Assignment 3</a>
+                <button id="themeBtn" class="btn btn-ghost" type="button" aria-pressed="false">
+                    Toggle theme
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+
+        <!-- INTRO -->
+        <section class="card">
+            <p class="section-num">IAT 355 · Assignment 3</p>
+            <h2>Video Game Sales — Data Visualizations</h2>
+            <p>
+                An exploration of global video game sales data using <strong>Vega-Lite</strong>.
+                The dataset covers <strong>16,291 titles</strong> across 31 platforms from 1980–2020,
+                with sales figures (in millions of units) split across North America, Europe, Japan, and Other regions.
+            </p>
+        </section>
+
+        <!-- DATASET -->
+        <section class="card">
+            <p class="section-num">Section 01 — Dataset</p>
+            <h2>About the Data</h2>
+            <p>
+                The data is in <strong>long format</strong> each game appears four times (once per region),
+                giving 65,164 rows. Sales are in <strong>millions of units</strong> and are heavily
+                right-skewed: most games sell under 1M copies while Wii Sports alone sold 82.74M,
+                largely because it was bundled with the console.
+            </p>
+
+            <div class="stat-row">
+                <div class="stat-box"><div class="stat-val">16.3K</div><div class="stat-label">Unique Titles</div></div>
+                <div class="stat-box"><div class="stat-val">31</div><div class="stat-label">Platforms</div></div>
+                <div class="stat-box"><div class="stat-val">12</div><div class="stat-label">Genres</div></div>
+                <div class="stat-box"><div class="stat-val">0.54M</div><div class="stat-label">Avg Global Sales</div></div>
+                <div class="stat-box"><div class="stat-val">82.74M</div><div class="stat-label">Max (Wii Sports)</div></div>
+                <div class="stat-box"><div class="stat-val">~579</div><div class="stat-label">Publishers</div></div>
+            </div>
+
+            <table class="dataset-table">
+                <thead>
+                    <tr><th>Variable</th><th>Type</th><th>Description</th><th>Key Notes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>name</td><td><span class="type-tag type-nom">Nominal</span></td><td>Game title</td><td>16,291 unique entries</td></tr>
+                    <tr><td>platform</td><td><span class="type-tag type-nom">Nominal</span></td><td>Gaming platform</td><td>31 platforms; PS2 most common</td></tr>
+                    <tr><td>year</td><td><span class="type-tag type-ord">Ordinal</span></td><td>Year of release</td><td>1980–2020; peak ~2008</td></tr>
+                    <tr><td>genre</td><td><span class="type-tag type-nom">Nominal</span></td><td>Game genre</td><td>12 genres; Action most common</td></tr>
+                    <tr><td>publisher</td><td><span class="type-tag type-nom">Nominal</span></td><td>Publishing company</td><td>Nintendo leads total sales</td></tr>
+                    <tr><td>global_sales</td><td><span class="type-tag type-qnt">Quantitative</span></td><td>Total worldwide sales (M)</td><td>Mean 0.54M; max 82.74M</td></tr>
+                    <tr><td>sales_region</td><td><span class="type-tag type-nom">Nominal</span></td><td>Region label</td><td>na_sales / eu_sales / jp_sales / other_sales</td></tr>
+                    <tr><td>sales_amount</td><td><span class="type-tag type-qnt">Quantitative</span></td><td>Sales in that region (M)</td><td>NA highest for most platforms</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- VIS 1 -->
+        <section class="card">
+            <p class="section-num">Visualization 01 — Genre &amp; Platform</p>
+            <h2>Global Sales by Genre &amp; Platform</h2>
+            <div class="vis-question">
+                <strong>Q1:</strong> Which genres have the highest total global sales across all platforms?<br>
+                <strong>Q2:</strong> How does each genre's sales break down across the top gaming platforms?
+            </div>
+
+            <h3>Chart 1A — Total Global Sales by Genre</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis1a"></div></div>
+
+            <h3>Chart 1B — Genre × Platform Heatmap</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis1b"></div></div>
+
+            <div class="insight">
+                <strong>Insights —</strong> Action dominates global sales by a wide margin, followed by Sports and Shooter.
+                The heatmap shows the Wii's sales almost entirely concentrated in Sports — driven by the Wii Sports bundle.
+                PS2 and PS show broader coverage. Nintendo's legacy platforms (NES, SNES) heavily concentrate
+                in Platform games, reflecting their Mario-era dominance.
+            </div>
+        </section>
+
+        <!-- VIS 2 -->
+        <section class="card">
+            <p class="section-num">Visualization 02 — Sales Over Time</p>
+            <h2>Sales Trends Over Time</h2>
+            <div class="vis-question">
+                <strong>Q1:</strong> How have total global video game sales trended year-over-year from 1980 to 2016?<br>
+                <strong>Q2:</strong> Which genres drove the sales peaks, and when did each genre peak?
+            </div>
+
+            <h3>Chart 2A — Total Global Sales Per Year</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis2a"></div></div>
+
+            <h3>Chart 2B — Genre Sales Trends (Top 6 Genres)</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis2b"></div></div>
+
+            <div class="insight">
+                <strong>Insights —</strong> Sales grew steadily from the early 1990s and peaked around
+                <strong>2008–2009</strong> during the Wii/PS3/X360 generation. Action and Sports drove that peak.
+                Role-Playing games show an earlier rise in the late 1990s — the golden era of JRPGs on PS1.
+                The post-2012 dropoff likely reflects incomplete data for newer releases.
+            </div>
+        </section>
+
+        <!-- VIS 3 -->
+        <section class="card">
+            <p class="section-num">Visualization 03 — Regional Sales</p>
+            <h2>Regional Sales vs. Platform</h2>
+            <div class="vis-question">
+                <strong>Q1:</strong> How do sales proportions across NA, EU, JP, and Other regions vary by platform?<br>
+                <strong>Q2:</strong> Which platforms are uniquely dominant in Japan compared to Western markets?
+            </div>
+
+            <h3>Chart 3A — Regional Sales Share by Platform</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis3a"></div></div>
+
+            <h3>Chart 3B — NA vs Japan Sales by Platform</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis3b"></div></div>
+
+            <div class="insight">
+                <strong>Insights —</strong> North America dominates most Western platforms (X360, PS3, Wii).
+                Japan is different <strong>3DS, DS, and GB</strong> have dramatically higher JP share,
+                reflecting Japan's preference for handheld gaming. The Xbox 360 has nearly zero Japan presence.
+                The NES shows high JP share as expected, since it launched as the Japanese Famicom.
+            </div>
+        </section>
+
+        <!-- VIS 4 -->
+        <section class="card">
+            <p class="section-num">Visualization 04 — Visual Story</p>
+            <h2>Nintendo's Dominance</h2>
+            <div class="vis-question">
+                <strong>Q1:</strong> How does Nintendo's total global sales compare to other major publishers?<br>
+                <strong>Q2:</strong> What are the top 20 best-selling games of all time, and who published them?
+            </div>
+
+            <h3>Chart 4A — Top 15 Publishers by Total Global Sales</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis4a"></div></div>
+
+            <h3>Chart 4B — Top 20 Best-Selling Games of All Time</h3>
+            <div class="viz-wrap"><div class="chart-wrap" id="vis4b"></div></div>
+
+            <div class="insight">
+                <strong>Insights —</strong> Nintendo leads all publishers in total sales despite releasing far fewer
+                titles than EA or Activision. In the top 20 best-sellers, Nintendo occupies roughly 14 spots.
+                <strong>Wii Sports at 82.74M</strong> is in a class of its own — more than double the next
+                highest title largely due to hardware bundling. This reflects Nintendo's strategy of creating
+                evergreen, family-friendly titles that sell for years.
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-row">
+            <p class="muted">© <span id="year"></span> Reme Mwase</p>
+            <a class="muted link" href="index.html">← Back to Home</a>
+        </div>
+    </footer>
+
+    <script>
+    // ── Vega-Lite config — reads your CSS variables live so it always matches ──
+    function vegaConfig() {
+        const cs     = getComputedStyle(document.documentElement);
+        const muted  = cs.getPropertyValue('--muted').trim();
+        const line   = cs.getPropertyValue('--line').trim();
+        const accent = cs.getPropertyValue('--accent').trim();
+        return {
+            background: 'transparent',
+            font: cs.getPropertyValue('--font').trim(),
+            axis: {
+                domainColor: line,   gridColor: line,
+                labelColor:  muted,  titleColor: muted,
+                tickColor:   line,
+                labelFontSize: 11,   titleFontSize: 11, titlePadding: 10
+            },
+            legend: { labelColor: muted, titleColor: muted, labelFontSize: 11, titleFontSize: 11 },
+            title:  { color: muted, fontSize: 12 },
+            view:   { stroke: 'transparent' }
+        };
+    }
+
+    // ⚠️ videogames_long.csv must be in the same folder as this HTML file
+    const DATA = 'videogames_long.csv';
+
+    function embed(id, spec) {
+        spec.config = vegaConfig();
+        vegaEmbed('#' + id, spec, { actions: false }).catch(console.error);
+    }
+
+    // Colour palette pulled from your --accent and complementary hues
+    const C = {
+        accent: '#7aa2ff',
+        amber:  '#fbbf24',
+        green:  '#34d399',
+        pink:   '#f472b6',
+        red:    '#f87171',
+        cyan:   '#38bdf8',
+        orange: '#fb923c',
+        purple: '#a78bfa',
+    };
+
+    // ── VIS 1A: Total Global Sales by Genre (bar) ─────────────────────────────
+    embed('vis1a', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 300,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { aggregate: [{ op: 'sum', field: 'global_sales', as: 'TotalSales' }], groupby: ['genre'] }
+        ],
+        mark: { type: 'bar', color: C.accent, cornerRadiusEnd: 6 },
+        encoding: {
+            x: { field: 'TotalSales', type: 'quantitative', title: 'Total Global Sales (Millions)' },
+            y: { field: 'genre', type: 'nominal', sort: '-x', title: null },
+            tooltip: [
+                { field: 'genre', title: 'Genre' },
+                { field: 'TotalSales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 1B: Genre × Platform Heatmap ─────────────────────────────────────
+    embed('vis1b', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 360,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { filter: { field: 'platform', oneOf: ['PS2','X360','PS3','Wii','DS','PS','GBA','PS4','3DS','SNES'] } },
+            { aggregate: [{ op: 'sum', field: 'global_sales', as: 'TotalSales' }], groupby: ['genre','platform'] }
+        ],
+        mark: { type: 'rect' },
+        encoding: {
+            x: { field: 'platform', type: 'nominal', title: 'Platform' },
+            y: { field: 'genre', type: 'nominal', title: null,
+                 sort: { op: 'sum', field: 'TotalSales', order: 'descending' } },
+            color: {
+                field: 'TotalSales', type: 'quantitative', title: 'Sales (M)',
+                scale: { range: ['#1a1d2e', '#3a5080', C.accent] }
+            },
+            tooltip: [
+                { field: 'genre', title: 'Genre' },
+                { field: 'platform', title: 'Platform' },
+                { field: 'TotalSales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 2A: Global Sales Over Time (area) ────────────────────────────────
+    embed('vis2a', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 260,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { filter: 'datum.year > 1979 && datum.year < 2017' },
+            { aggregate: [{ op: 'sum', field: 'global_sales', as: 'YearlySales' }], groupby: ['year'] }
+        ],
+        mark: { type: 'area', color: C.accent, fillOpacity: 0.18,
+                line: { color: C.accent, strokeWidth: 2 } },
+        encoding: {
+            x: { field: 'year', type: 'ordinal', title: 'Year', axis: { labelAngle: -45 } },
+            y: { field: 'YearlySales', type: 'quantitative', title: 'Total Global Sales (M)' },
+            tooltip: [
+                { field: 'year', title: 'Year' },
+                { field: 'YearlySales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 2B: Genre trends (multi-line) ────────────────────────────────────
+    embed('vis2b', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 320,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { filter: 'datum.year > 1979 && datum.year < 2017' },
+            { filter: { field: 'genre', oneOf: ['Action','Sports','Shooter','Role-Playing','Platform','Racing'] } },
+            { aggregate: [{ op: 'sum', field: 'global_sales', as: 'GenreSales' }], groupby: ['year','genre'] }
+        ],
+        mark: { type: 'line', strokeWidth: 2 },
+        encoding: {
+            x: { field: 'year', type: 'ordinal', title: 'Year', axis: { labelAngle: -45 } },
+            y: { field: 'GenreSales', type: 'quantitative', title: 'Sales (Millions)' },
+            color: {
+                field: 'genre', type: 'nominal',
+                scale: {
+                    domain: ['Action','Sports','Shooter','Role-Playing','Platform','Racing'],
+                    range:  [C.accent, C.amber, C.green, C.pink, C.red, C.cyan]
+                }
+            },
+            tooltip: [
+                { field: 'year', title: 'Year' },
+                { field: 'genre', title: 'Genre' },
+                { field: 'GenreSales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 3A: Regional share by platform (normalized stacked bar) ───────────
+    embed('vis3a', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 380,
+        data: { url: DATA },
+        transform: [
+            { filter: { field: 'platform', oneOf: ['PS2','X360','PS3','Wii','DS','PS','GBA','3DS','NES','GB'] } },
+            { aggregate: [{ op: 'sum', field: 'sales_amount', as: 'RegSales' }], groupby: ['platform','sales_region'] }
+        ],
+        mark: { type: 'bar' },
+        encoding: {
+            x: { field: 'RegSales', type: 'quantitative', stack: 'normalize',
+                 axis: { format: '%' }, title: 'Regional Share' },
+            y: { field: 'platform', type: 'nominal', sort: '-x', title: null },
+            color: {
+                field: 'sales_region', type: 'nominal', title: 'Region',
+                scale: {
+                    domain: ['na_sales','eu_sales','jp_sales','other_sales'],
+                    range:  [C.accent, C.green, C.amber, '#9ca3af']
+                },
+                legend: {
+                    labelExpr: "{'na_sales':'North America','eu_sales':'Europe','jp_sales':'Japan','other_sales':'Other'}[datum.label]"
+                }
+            },
+            tooltip: [
+                { field: 'platform', title: 'Platform' },
+                { field: 'sales_region', title: 'Region' },
+                { field: 'RegSales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 3B: NA vs JP scatter ──────────────────────────────────────────────
+    embed('vis3b', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 360,
+        data: { url: DATA },
+        transform: [
+            { filter: { field: 'platform', oneOf: ['PS2','X360','PS3','Wii','DS','PS','GBA','3DS','NES','GB','SNES','N64'] } },
+            { filter: "datum.sales_region === 'na_sales' || datum.sales_region === 'jp_sales'" },
+            { aggregate: [{ op: 'sum', field: 'sales_amount', as: 'Total' }], groupby: ['platform','sales_region'] },
+            { pivot: 'sales_region', value: 'Total', groupby: ['platform'] }
+        ],
+        mark: { type: 'point', filled: true, size: 130 },
+        encoding: {
+            x: { field: 'na_sales', type: 'quantitative', title: 'Total NA Sales (Millions)' },
+            y: { field: 'jp_sales', type: 'quantitative', title: 'Total Japan Sales (Millions)' },
+            color: {
+                field: 'platform', type: 'nominal',
+                scale: { range: [C.accent, C.amber, C.green, C.pink, C.red, C.cyan, C.orange, C.purple,
+                                 '#f9a8d4','#6ee7b7','#fde68a','#bfdbfe'] }
+            },
+            tooltip: [
+                { field: 'platform', title: 'Platform' },
+                { field: 'na_sales', title: 'NA Sales (M)', format: '.1f' },
+                { field: 'jp_sales', title: 'JP Sales (M)', format: '.1f' }
+            ]
+        }
+    });
+
+    // ── VIS 4A: Top publishers (bar, Nintendo highlighted) ────────────────────
+    embed('vis4a', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 320,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { aggregate: [{ op: 'sum', field: 'global_sales', as: 'PubSales' }], groupby: ['publisher'] },
+            { window: [{ op: 'rank', as: 'rank' }], sort: [{ field: 'PubSales', order: 'descending' }] },
+            { filter: 'datum.rank <= 15' }
+        ],
+        mark: { type: 'bar', cornerRadiusEnd: 6 },
+        encoding: {
+            x: { field: 'PubSales', type: 'quantitative', title: 'Total Global Sales (Millions)' },
+            y: { field: 'publisher', type: 'nominal', sort: '-x', title: null },
+            color: {
+                condition: { test: "datum.publisher === 'Nintendo'", value: C.amber },
+                value: C.accent
+            },
+            tooltip: [
+                { field: 'publisher', title: 'Publisher' },
+                { field: 'PubSales', title: 'Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+
+    // ── VIS 4B: Top 20 games (bar, coloured by publisher) ────────────────────
+    embed('vis4b', {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        width: 'container', height: 480,
+        data: { url: DATA },
+        transform: [
+            { filter: "datum.sales_region === 'na_sales'" },
+            { window: [{ op: 'rank', as: 'rank' }], sort: [{ field: 'global_sales', order: 'descending' }] },
+            { filter: 'datum.rank <= 20' }
+        ],
+        mark: { type: 'bar', cornerRadiusEnd: 6 },
+        encoding: {
+            x: { field: 'global_sales', type: 'quantitative', title: 'Global Sales (Millions)' },
+            y: { field: 'name', type: 'nominal', sort: '-x', title: null },
+            color: {
+                field: 'publisher', type: 'nominal',
+                scale: {
+                    domain: ['Nintendo','Take-Two Interactive','Microsoft Game Studios',
+                             'Electronic Arts','Activision','Ubisoft','Rockstar Games'],
+                    range:  [C.amber, C.accent, C.green, C.red, C.pink, C.cyan, C.orange]
+                }
+            },
+            tooltip: [
+                { field: 'name', title: 'Game' },
+                { field: 'publisher', title: 'Publisher' },
+                { field: 'platform', title: 'Platform' },
+                { field: 'global_sales', title: 'Global Sales (M)', format: '.2f' }
+            ]
+        }
+    });
+    </script>
+</body>
+</html>
