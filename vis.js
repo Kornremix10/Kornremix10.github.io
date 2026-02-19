@@ -2,7 +2,7 @@
 
     const DATA = "dataset/videogames_long.csv";
 
-    // ── Read CSS variables so charts always match your site's theme ─────────────
+    // Read CSS variables so charts always match your site's theme 
     function vegaConfig() {
         const cs    = getComputedStyle(document.documentElement);
         const muted = cs.getPropertyValue('--muted').trim()  || '#a9b4c3';
@@ -40,7 +40,7 @@
         purple: '#a78bfa',
     };
 
-    // ── VIS 1A: Total Global Sales by Genre (horizontal bar) ─────────────────────
+    //  VIS 1A: Total Global Sales by Genre (horizontal bar) 
     embed('vis1a', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 300,
@@ -60,7 +60,7 @@
         }
     });
 
-    // ── VIS 1B: Genre × Platform Heatmap ─────────────────────────────────────────
+    //  VIS 1B: Genre × Platform Heatmap 
     embed('vis1b', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 360,
@@ -87,7 +87,7 @@
         }
     });
 
-    // ── VIS 2A: Global Sales Over Time (area chart) ───────────────────────────────
+    //  VIS 2A: Global Sales Over Time (area chart) 
     embed('vis2a', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 260,
@@ -111,9 +111,7 @@
         }
     });
 
-    // ── VIS 2B: Top 6 Genre Sales Trends Over Time (multi-line) ──────────────────
-    // Uses joinaggregate + dense_rank to find the real top 6 genres from the data
-    // instead of hardcoding names, so it always works regardless of exact CSV values.
+    //  VIS 2B: Top 6 Genre Sales Trends Over Time (multi-line)
     embed('vis2b', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 320,
@@ -141,7 +139,7 @@
         }
     });
 
-    // ── VIS 3A: Regional Sales Share by Platform (100% normalized stacked bar) ────
+    //  VIS 3A: Regional Sales Share by Platform ( stacked bar) 
     embed('vis3a', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 380,
@@ -174,7 +172,7 @@
         }
     });
 
-    // ── VIS 3B: NA vs Japan Total Sales by Platform (scatter) ────────────────────
+    // VIS 3B: NA vs Japan Total Sales by Platform (scatter) 
     embed('vis3b', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 360,
@@ -203,7 +201,7 @@
         }
     });
 
-    // ── VIS 4A: Top 15 Publishers by Total Sales (Nintendo highlighted) ───────────
+    //  VIS 4A: Top 15 Publishers by Total Sales (Nintendo highlighted)
     embed('vis4a', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 320,
@@ -229,8 +227,8 @@
         }
     });
 
-    // ── VIS 4B: Top 20 Best-Selling Games of All Time ─────────────────────────────
-    embed('vis4b', {
+    //  VIS 4B: Top 20 Best-Selling Games of All Time 
+   embed('vis4b', {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
         width: 'container', height: 480,
         data: { url: DATA },
@@ -244,6 +242,7 @@
             x: { field: 'global_sales', type: 'quantitative', title: 'Global Sales (Millions)' },
             y: { field: 'name', type: 'nominal', sort: '-x', title: null },
             color: {
+                condition: { test: "datum.publisher === 'Nintendo'", value: C.amber },
                 field: 'publisher', type: 'nominal',
                 scale: { scheme: 'tableau10' }
             },
