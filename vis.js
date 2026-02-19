@@ -242,9 +242,14 @@
             x: { field: 'global_sales', type: 'quantitative', title: 'Global Sales (Millions)' },
             y: { field: 'name', type: 'nominal', sort: '-x', title: null },
             color: {
-                condition: { test: "datum.publisher === 'Nintendo'", value: C.amber },
                 field: 'publisher', type: 'nominal',
-                scale: { scheme: 'tableau10' }
+                scale: {
+                    domain: ['Nintendo','Microsoft Game Studios','Activision',
+                             'Bethesda Softworks','Sony Computer Entertainment',
+                             'Electronic Arts','Ubisoft','Take-Two Interactive','Rockstar Games'],
+                    range:  [C.amber, C.cyan, C.accent, C.orange, C.purple,
+                             C.red, C.pink, C.green, C.green]
+                }
             },
             tooltip: [
                 { field: 'name',         title: 'Game' },
